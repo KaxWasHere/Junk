@@ -1,0 +1,22 @@
+if getgenv().loop then
+    local plr = game:GetService("Players").LocalPlayer
+    local Tool = (plr.Character:FindFirstChildWhichIsA("Tool") or plr.Backpack:FindFirstChildWhichIsA("Tool"))
+    
+    if getgenv().loop and plr.Character and plr.Character.Humanoid.Health > 0 and Tool then
+        while getgenv().loop and plr.Character.Humanoid.Health > 0 do
+            for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+                if v.Character and v.Character.Humanoid.Health > 0 and v.Name ~= plr.Name and not v.Character:FindFirstChildWhichIsA("ForceField") and not table.find(getgenv().wl, v.Name) or table.find(getgenv().wl, v.DisplayName) then
+                    while plr.Character.Humanoid.Health > 0 and v.Character.Humanoid.Health > 0 and not v.Character:FindFirstChildWhichIsA("ForceField") do
+                        plr.Character.Humanoid:EquipTool(Tool)
+                        
+                        plr.Character:SetPrimaryPartCFrame(v.Character.HumanoidRootPart.CFrame * CFrame.new(-1.3, 0.7, 2.7))
+                        Tool:Activate()
+                        
+                        task.wait()
+                    end
+                end
+            end
+            task.wait()
+        end
+    end
+end
